@@ -1,11 +1,12 @@
 //Express initialization
 const express = require('express');
-const app = express();
+const DB = require('./config/db');
 
-//check api
-app.get('/check', (req, res) => {
-    res.send('API Running')
-})
+const app = express();
+DB.init();
+
+//Define Routes
+app.use('/', require('./routes/route'));
 
 //Port assignment
 const PORT = process.env.PORT || 5000;
