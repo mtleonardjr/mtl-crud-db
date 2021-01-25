@@ -1,0 +1,11 @@
+{
+  "name": "mtl-crud-db",
+  "version": "1.0.0",
+  "description": "This project is an api crud service which interacts with a mongodb. \r api calls are used to create, read, write, and delete records\r postman will be used as the 'front end', allowing the api calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
