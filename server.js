@@ -3,9 +3,13 @@ const express = require('express');
 const DB = require('./library/database-adaptor');
 const config = require('./resources/config')
 
-
 const app = express();
+
+//Connect to DB
 DB.init();
+
+//Init middleware
+app.use(express.json());
 
 //Define Routes
 app.use('/', require('./routes/route'));
