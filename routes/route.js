@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const logger = require('node-color-log');
 const DBAdaptor = require('../library/database-adaptor')
+const name = 'route';
 
 //default route
 router.get('/', (req,res) => {
@@ -15,25 +16,24 @@ router.get('/check', (req, res) => {
 
 router.put("/create", (req, res) => {
     if (req.body.title === undefined || req.body.text === undefined|| req.body === undefined) {
-        logger.error('/create error')
+        logger.error(name+': /create endpoint failure. request data missing')
         res.statusCode = 500;
-        res.end();
-        // return;
+        res.send({status: "error", msg: 'request data missing'});
     } else {
-        logger.info('/create hit')
+        logger.info(name+': /create endpoint hit')
         DBAdaptor.create(req).then(
             (r)=> {
-                logger.info('Created: '+ req.body.title)   
+                logger.info(name+': /create endpoint success. record upserted: '+ req.body.title)   
                 res.statusCode = 200;
-                res.send('Created: '+ req.body.title);
+                res.send({status: "success", msg: 'note updated successfully'});
             },
             (err)=> {
-                logger.error('/create error' + err)
+                logger.error(name+': /create endpoint failure' + err)
                 res.statusCode = 500;
-                res.end();
+                res.send({status: "error", msg: 'note failed to update'});
             }
         )
     }
-  });
+});
 
 module.exports = router;

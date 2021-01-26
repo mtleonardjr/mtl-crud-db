@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../resources/config')
 const logger = require('node-color-log');
 const note = require ('../models/Note');
+const name = 'database-adaptor';
 
 
 class DB {
@@ -9,10 +10,10 @@ class DB {
         return new Promise ((resolve, reject) => {
             mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
                 if (err) {
-                    logger.error('Unable to connect to the server. Please start the server. Error:', err);
+                    logger.error(name+': Unable to connect to the server. Please start the server. Error:', err);
                     reject();
                 } else {
-                    logger.info('Connected to Server successfully!');
+                    logger.info(name+': Connected to Server successfully!');
                     resolve();
                 }
             });
@@ -26,7 +27,6 @@ class DB {
                     resolve(response)
                 },
                 (error)=> {
-                    logger.error(error)
                     reject(error)
                 }
             )
