@@ -33,6 +33,45 @@ class DB {
         })
     }
 
+    readAll() {
+        return new Promise ((resolve, reject) => {
+            note.find({}).then(
+                (response)=> {
+                    resolve(response)
+                },
+                (error)=> {
+                    reject(error)
+                }
+            )
+        })
+    }
+
+    read(title) {
+        return new Promise ((resolve, reject) => {
+            note.findOne({ title: title }).then(
+                (response)=> {
+                    resolve(response)
+                },
+                (error)=> {
+                    reject(error)
+                }
+            )
+        })
+    }
+
+    delete(title) {
+        return new Promise ((resolve, reject) => {
+            note.deleteOne({ title: title }).then(
+                (response)=> {
+                    resolve(response)
+                },
+                (error)=> {
+                    reject(error)
+                }
+            )
+        })
+    }
+
 
 
 
